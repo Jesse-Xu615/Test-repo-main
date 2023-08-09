@@ -1,0 +1,24 @@
+name: Update submodule
+
+on:
+  repository_dispatch:
+    types: submodule-update
+
+jobs:
+  updateSubmodule:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+
+    - name: Update submodule
+      run: |
+        cd api
+        git pull --rebase origin main
+        cd ..
+        git add api
+        git commit -m "Update submodule to latest commit"
+        git push
