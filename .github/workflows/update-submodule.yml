@@ -17,7 +17,7 @@ jobs:
     - name: Update submodule
       run: |
         cd api
-        git pull origin main
+        git pull --rebase origin main
         cd ..
         git add api
         git commit -m "Update submodule to latest commit"
