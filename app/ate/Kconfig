@@ -1,0 +1,65 @@
+menu "ATE tests"
+
+config ATE_DEBUG_UART
+	bool "Use UART debug instead of GPIO"
+	default n
+
+config ATE_SUPPORT_INT
+	bool
+	default n
+
+config ATE_MAX_BUS_CLK
+	bool "Use maximum bus clocks"
+	default y
+
+config ATE_PORBOR
+	bool "Perform PORBOR test"
+	default n
+
+config ATE_EFUSE
+	bool "Perform eFuse test"
+	default n
+
+config ATE_AUXADC
+	bool "Perform AUXADC test"
+	default n
+	select ATE_SUPPORT_INT
+
+config ATE_SYSMEM
+	bool "Perform SYS memory test"
+	default n
+
+config ATE_32KRC
+	bool "Perform 32K RC OSC test"
+	default n
+	select ATE_SUPPORT_INT
+
+config ATE_USBPHY
+	bool "Perform USB PHY simple test"
+	default n
+
+config ATE_LOWPOWER
+	bool "Perform LowPower test"
+	default n
+
+config ATE_SPIFLASH
+	bool "Perform SPI flash test"
+	default n
+
+config ATE_IOLEAKAGE
+	bool "Perform IO leakage test"
+	default n
+
+config ATE_GPIO_DONE
+    int "GPIO to control when test is done"
+	default 21
+
+config ATE_GPIO_VERDICT
+    int "GPIO to control for verdict"
+	default 22
+
+config ATE_BIN
+	string "Name of the ATE binary file"
+	default "wise-ate.bin"
+
+endmenu

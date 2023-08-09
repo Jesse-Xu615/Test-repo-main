@@ -1,0 +1,11 @@
+menu "irq_dispatcher"
+
+config IRQD_ENABLE_DEBUG
+   bool "Enable debug output via UART"
+   default y
+
+config IRQD_BIN
+	string "Name of irq_dispatcher binary file"
+	default "wise-irqd.bin"
+
+endmenu

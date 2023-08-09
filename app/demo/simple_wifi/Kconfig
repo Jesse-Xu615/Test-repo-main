@@ -1,0 +1,38 @@
+menu "Simple Wi-Fi configuration"
+
+choice WIFI_MODE
+    prompt "AP or STA"
+    default WIFI_MODE_STATION
+    help
+        Select the wi-fi mode as softAP or station.
+
+config WIFI_MODE_SOFTAP
+    bool "SoftAP"
+config WIFI_MODE_STATION
+    bool "Station"
+endchoice
+
+config WIFI_MODE_AP
+    bool
+    default y if WIFI_MODE_SOFTAP
+    default n if WIFI_MODE_STATION
+
+config WIFI_SSID
+    string "WiFi SSID"
+    default "myssid"
+    help
+	SSID (network name) for the example to connect to.
+
+config WIFI_PASSWORD
+    string "WiFi Password"
+    default "mypassword"
+    help
+	WiFi password (WPA or WPA2) for the example to use.
+		
+config MAX_STA_CONN
+    int "Max STA conn"
+    default 4
+    help
+	Max number of the STA connects to AP.
+
+endmenu

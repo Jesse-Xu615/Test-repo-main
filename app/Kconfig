@@ -1,0 +1,90 @@
+choice
+	prompt "Applications"
+
+config DEMO_CMDLINE
+	bool "Command-line demo"
+
+config DEMO_SIMPLE_WIFI
+	bool "Simple Wi-Fi demo"
+	select WISE_API
+
+config DEMO_API_WIFI
+	bool "Wi-Fi API demo"
+	select SDK
+	select API_WIFI
+
+config DEMO_MQTT 
+	bool "MQTT demo"
+	select SDK
+	select API_WIFI
+	select MQTT
+	select COREMQTT
+	select COREMQTT_AGENT
+	select CMDLINE
+
+config BOOTLOADER
+	bool "wise-boot"
+
+config WATCHER
+	bool "wise watcher"
+
+config IRQ_DISPATCHER
+	bool "irq_dispatcher"
+
+config BOOTROM
+    bool "wise-rom"
+	select USE_DEFAULT_CLK if SOC_SCM2010
+
+config MCUBOOT_BL
+    bool "wise-mcuboot"
+
+config ATE
+    bool "ATE tests"
+	depends on SOC_SCM2010
+
+#config TEST_PBUF
+#	bool "pbuf test"
+
+#config TEST_CALLOUT
+#	bool "callout test"
+
+#config TEST_TASKQ
+#	bool "taskqueue test"
+
+endchoice
+
+if BOOTLOADER
+source "app/boot/Kconfig"
+endif
+
+if BOOTROM
+source "app/rom/Kconfig"
+endif
+
+if DEMO_SIMPLE_WIFI
+source "app/demo/simple_wifi/Kconfig"
+endif
+
+if DEMO_API_WIFI
+source "api/examples/wifi/Kconfig"
+endif
+
+if DEMO_MQTT
+source "api/examples/mqtt/Kconfig"
+endif
+
+if WATCHER
+source "app/watcher/Kconfig"
+endif
+
+if IRQ_DISPATCHER
+source "app/irqd//Kconfig"
+endif
+
+if MCUBOOT_BL
+source "app/mcuboot/Kconfig"
+endif
+
+if ATE
+source "app/ate/Kconfig"
+endif

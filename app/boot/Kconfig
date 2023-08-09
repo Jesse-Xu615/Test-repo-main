@@ -1,0 +1,23 @@
+menu "Boot related configuration"
+
+comment "Build"
+
+config BOOT_BIN
+	string "Name of the boot loader binary file"
+	default "wise-boot.bin"
+
+config BOOT_TIMEOUT
+    int "Seconds to wait before entering CLI mode"
+    default 3
+
+comment "Partition table"
+
+config PT_NUTTX_SIZE
+	int "Partition size for NuttX binary in KBytes."
+	default 1024
+
+config PT_WISE_SIZE
+	int "Partition size for wise binary in KBytes."
+	default 1024
+
+endmenu

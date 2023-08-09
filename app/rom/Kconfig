@@ -1,0 +1,31 @@
+menu "ROM related configuration"
+
+config UART_BOOT
+	bool "Support UART Boot"
+	default n
+    select XYZMODEM
+
+config USB_BOOT
+	bool "Support USB Boot"
+	default n
+	select TINYUSB
+	select TUSB_TUD_DFU_RUNTIME
+	select TUSB_TUD_DFU
+
+config SDIO_BOOT
+	bool "Support SDIO Boot"
+	default n
+
+config FLASH_PROTECTION
+	bool "Support flash protection"
+	default n
+
+config SECURE_BOOT
+	bool "Support secure boot"
+	default n
+
+config ANTI_ROLLBACK
+	bool "Support anti-rollback protection"
+	default n
+
+endmenu

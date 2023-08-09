@@ -1,0 +1,71 @@
+menu "Watcher related configuration"
+
+config PM_TEST
+   bool "Enable power managment test"
+   default n
+
+config WATCHER_FILTER_MULTICAST
+   bool "Enable multicast filter in Watcher"
+   default y
+
+config WATCHER_FILTER_TCP
+   bool "Enable TCP Filter in Watcher"
+   default y
+
+config WATCHER_FILTER_UDP
+   bool "Enable UDP Filter in Watcher"
+   default y
+
+config WATCHER_TX_KEEPALIVE
+   bool "Enable TX Null for Keepalive"
+   depends on !WATCHER_TX_GARP
+   default y
+
+if WATCHER_TX_KEEPALIVE
+config NULL_PERIODIC_TX_TIME
+   int "Null packet tx time cycle as sec unit"
+   default 60
+endif
+
+config WATCHER_TX_GARP
+   bool "Enable TX GARP for keepalive and arp table update"
+   depends on !WATCHER_TX_KEEPAVLIE
+   default n
+
+if WATCHER_TX_GARP
+config GARP_PERIODIC_TX_TIME
+   int "GARP packet tx time cycle as sec unit"
+   default 60
+endif
+
+config WATCHER_TX_ARP_RESP
+   bool "Enable ARP Response about Request"
+   default y
+
+config CONS_BCN_LOSS_THRESHOLD
+   int "consecutive BCN loss count(threshold)"
+   default 20
+
+config WATCHER_TX_UDPHOLE
+   bool "Enable UDP Hole punch tx"
+   default n
+
+if WATCHER_TX_UDPHOLE
+config UDPHOLE_PERIODIC_TX_TIME
+   int "UDP Hole packet tx time cycle as min unit"
+   default 3
+endif
+
+config WATCHER_TX_TCPHOLE
+   bool "Enable TCP Hole punch tx"
+   default n
+
+if WATCHER_TX_TCPHOLE
+config TCPHOLE_PERIODIC_TX_TIME
+   int "TCP Hole packet tx time cycle as min unit"
+   default 3
+endif
+config WATCHER_IN_WISE_ONLY
+   bool "Working in WISE ONLY"
+   default y
+endmenu
